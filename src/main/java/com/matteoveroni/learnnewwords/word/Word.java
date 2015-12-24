@@ -4,6 +4,7 @@ package com.matteoveroni.learnnewwords.word;
  *
  * @author Matteo Veroni
  */
+
 public class Word {
 
     private String textName;

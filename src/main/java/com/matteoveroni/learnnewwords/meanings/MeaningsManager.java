@@ -8,6 +8,7 @@ import java.util.Locale;
  *
  * @author Matteo Veroni
  */
+
 public class MeaningsManager {
 
     public void addMeaning() {

@@ -7,6 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+/**
+ *
+ * @author Matteo Veroni
+ */
+
 public class FXMLController implements Initializable {
     
     @FXML
