@@ -2,4 +2,8 @@
 
 Author: Matteo Veroni
 
-Software written in Java designed for learning new words of a foreign language
+Description: Software written in Java designed for learning new words of a foreign language
+
+Technologies and Tools used in the project: Java, Netbeans IDE, Git, Maven, JavaFX 
+
+
