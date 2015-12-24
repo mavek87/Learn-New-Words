@@ -1,15 +1,15 @@
 {
-    "parole": [
+    "parola": [
         {
-            "parola": "allow",
+            "nomeParola": "allow",
             "traduzioni": ["consentire", "permettere"]
         },
         {
-            "parola": "dog",
+            "nomeParola": "dog",
             "traduzioni": ["cane"]
         },
         {
-            "parola": "star",
+            "nomeParola": "star",
             "traduzioni": ["stella", "celebrità"]
         }
     ]
