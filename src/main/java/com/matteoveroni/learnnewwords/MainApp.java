@@ -1,8 +1,14 @@
 package com.matteoveroni.learnnewwords;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.matteoveroni.learnnewwords.words.WordBean;
-import com.matteoveroni.learnnewwords.words.WordsBean;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.matteoveroni.learnnewwords.words.Word;
+import com.matteoveroni.learnnewwords.words.Words;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -28,20 +34,9 @@ public class MainApp extends Application {
         stage.setTitle("Learn New Words | v." + VERSION);
         stage.setScene(scene);
         stage.show();
+        
+        performGsonTest();
 
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonInString = "{'name' : 'mkyong'}";
-
-            //JSON from URL to Object
-            WordsBean wordsBean = mapper.readValue(getClass().getResource("/persistence/italian-english.json"), WordsBean.class);
-
-            for (WordBean word : wordsBean.getWords()) {
-                System.out.println("Word " + word.toString());
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     /**
@@ -54,6 +49,43 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void performGsonTest() {
+
+        try {
+            String translationOfDog1 = "dog";
+
+            Word wordCane = new Word();
+            wordCane.setWordName("cane");
+            wordCane.addTranslation(translationOfDog1);
+
+            Words italianWords = new Words();
+            italianWords.addWord(wordCane);
+
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+
+            System.out.println(gson.toJson(italianWords));
+
+            BufferedReader jsonResourceReader
+                = new BufferedReader(
+                    new InputStreamReader(getClass().getResource("/persistence/italian-english.json").openConnection().getInputStream()
+                    )
+                );
+
+            Words italian_englishReader = gson.fromJson(jsonResourceReader, Words.class);
+
+            for (Word word : italian_englishReader.getWords()) {
+                System.out.println("Word -> " + word.getWordName());
+                for (String translation : word.getTranslations()) {
+                    System.out.println("\tTranslation ->" + translation);
+                }
+            }
+
+        } catch (IOException | JsonSyntaxException | JsonIOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

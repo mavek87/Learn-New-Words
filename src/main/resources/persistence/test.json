@@ -1,0 +1,14 @@
+{
+    "name": "matteo",
+    "surname": "veroni",
+    "array": [
+        {
+            "wordname": "allow",
+            "translations": ["consentire", "permettere"]
+        },
+        {
+            "wordname": "dog",
+            "translations": ["cane"]
+        }
+    ]
+}

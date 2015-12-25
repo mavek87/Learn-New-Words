@@ -1,15 +1,16 @@
 package com.matteoveroni.learnnewwords.words;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Matteo Veroni
  */
-public class WordBean {
+public class Word {
 
     private String wordName;
-    private String[] translations;
+    private List<String> translations = new ArrayList<>();
 
     public String getWordName() {
         return wordName;
@@ -19,12 +20,16 @@ public class WordBean {
         this.wordName = wordName;
     }
 
-    public String[] getTranslations() {
+    public List<String> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(String[] translations) {
+    public void setTranslations(List<String> translations) {
         this.translations = translations;
+    }
+
+    public void addTranslation(String translation) {
+        this.translations.add(translation);
     }
 
     @Override

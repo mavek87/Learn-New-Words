@@ -1,6 +1,6 @@
 package com.matteoveroni.learnnewwords.meanings;
 
-import com.matteoveroni.learnnewwords.words.WordBean;
+import com.matteoveroni.learnnewwords.words.Word;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +23,7 @@ public class MeaningsManager {
 
     }
 
-    public List<WordBean> getMeanings(WordBean word, Locale locale) {
+    public List<Word> getMeanings(Word word, Locale locale) {
         return null;
     }
 }

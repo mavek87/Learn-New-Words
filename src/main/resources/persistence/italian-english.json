@@ -1,16 +1,16 @@
 {
-    "parola": [
+    "words": [
         {
-            "nomeParola": "allow",
-            "traduzioni": ["consentire", "permettere"]
+            "wordName": "allow",
+            "translations": ["consentire", "permettere"]
         },
         {
-            "nomeParola": "dog",
-            "traduzioni": ["cane"]
+            "wordName": "dog",
+            "translations": ["cane"]
         },
         {
-            "nomeParola": "star",
-            "traduzioni": ["stella", "celebrità"]
+            "wordName": "star",
+            "translations": ["stella", "celebrità"]
         }
     ]
 }
