@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.matteoveroni.learnnewwords.localization.ResourceBundleManager;
+import com.matteoveroni.learnnewwords.localization.exceptions.ResourceBundleForThisLocaleDoesntExistException;
 import com.matteoveroni.learnnewwords.words.Word;
 import com.matteoveroni.learnnewwords.words.Words;
 import java.io.BufferedReader;
@@ -19,24 +21,31 @@ import javafx.stage.Stage;
 /**
  *
  * @author Matteo Veroni
+ * @version 0.0.1
+ *
+ * <b> Author Web Sites: </b>
+ * <br/><a href="http://www.matteoveroni.com">www.matteoveroni.com</a>
+ * <br/><a href="http://www.infoeinternet.com">www.infoeinternet.com</a>
  */
 public class MainApp extends Application {
 
-    private static final String VERSION = "0.0.1";
+    private static final String APPLICATION_NAME = "Learn New Words";
+    private static final String APPLICATION_VERSION = "0.0.1";
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-
-        stage.setTitle("Learn New Words | v." + VERSION);
-        stage.setScene(scene);
-        stage.show();
-        
-        performGsonTest();
-
+    public void start(Stage stage) {
+        ResourceBundleManager resourceBundleManager = new ResourceBundleManager();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"), resourceBundleManager.getResourceBundle());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/Styles.css");
+            stage.setTitle(APPLICATION_NAME + " | v." + APPLICATION_VERSION);
+            stage.setScene(scene);
+            stage.show();
+            performGsonTest();
+        } catch (ResourceBundleForThisLocaleDoesntExistException | IOException ex) {
+            throw new RuntimeException();
+        }
     }
 
     /**
