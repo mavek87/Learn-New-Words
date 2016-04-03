@@ -1,16 +1,13 @@
 {
-    "words": [
-        {
-            "wordName": "allow",
-            "translations": ["consentire", "permettere"]
-        },
-        {
-            "wordName": "dog",
-            "translations": ["cane"]
-        },
-        {
-            "wordName": "star",
-            "translations": ["stella", "celebrità"]
+    "languageOfTheDictionary": "en_EN",
+    "languageOfTranslations": "it_IT",
+    "dictionaryElements": {
+        "allow": {
+            "translations": [{
+                    "word": "consentire"
+                }, {
+                    "word": "permettere"
+                }]
         }
-    ]
+    }
 }

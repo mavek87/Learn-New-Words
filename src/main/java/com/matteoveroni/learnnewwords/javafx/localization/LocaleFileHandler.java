@@ -1,4 +1,4 @@
-package com.matteoveroni.learnnewwords.localization;
+package com.matteoveroni.learnnewwords.javafx.localization;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

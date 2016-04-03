@@ -1,6 +1,6 @@
-package com.matteoveroni.learnnewwords.localization;
+package com.matteoveroni.learnnewwords.javafx.localization;
 
-import com.matteoveroni.learnnewwords.localization.exceptions.ResourceBundleForThisLocaleDoesntExistException;
+import com.matteoveroni.learnnewwords.javafx.localization.exceptions.ResourceBundleForThisLocaleDoesntExistException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

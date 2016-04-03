@@ -1,4 +1,4 @@
-package com.matteoveroni.learnnewwords.localization.exceptions;
+package com.matteoveroni.learnnewwords.javafx.localization.exceptions;
 
 /**
  *
