@@ -1,13 +1,1 @@
-{
-    "languageOfTheDictionary": "en_EN",
-    "languageOfTranslations": "it_IT",
-    "dictionaryElements": {
-        "allow": {
-            "translations": [{
-                    "word": "consentire"
-                }, {
-                    "word": "permettere"
-                }]
-        }
-    }
-}
+{"dictionaryLanguage":"it","translationsLanguage":"en","dictionaryMap":{"arrestare":{"translations":["stop","arrest"]}}}

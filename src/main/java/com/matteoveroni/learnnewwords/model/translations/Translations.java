@@ -1,5 +1,6 @@
 package com.matteoveroni.learnnewwords.model.translations;
 
+import com.matteoveroni.learnnewwords.model.gson.GsonSingleton;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,6 @@ public class Translations {
 
 	@Override
 	public String toString() {
-		return "Translations{" + "translations=" + translations + '}';
-	}	
+		return GsonSingleton.getInstance().toJson(this);
+	}
 }

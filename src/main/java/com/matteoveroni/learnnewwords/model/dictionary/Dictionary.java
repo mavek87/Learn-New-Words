@@ -1,5 +1,6 @@
 package com.matteoveroni.learnnewwords.model.dictionary;
 
+import com.matteoveroni.learnnewwords.model.gson.GsonSingleton;
 import com.matteoveroni.learnnewwords.model.translations.Translations;
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,11 +33,17 @@ public class Dictionary {
 		dictionaryMap.replace(word, translations);
 	}
 
+	public Locale getDictionaryLanguage() {
+		return dictionaryLanguage;
+	}
+
+	public Locale getTranslationsLanguage() {
+		return translationsLanguage;
+	}
+
 	@Override
 	public String toString() {
-		return "Dictionary{" + "dictionaryLanguage=" + dictionaryLanguage + ", translationsLanguage=" + translationsLanguage + ", dictionaryMap=" + dictionaryMap + '}';
+		return GsonSingleton.getInstance().toJson(this);
 	}
-	
-	
 
 }

@@ -1,10 +1,16 @@
 package com.matteoveroni.learnnewwords;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.matteoveroni.learnnewwords.javafx.controllers.ModellableDemoController;
 import com.matteoveroni.learnnewwords.javafx.localization.ResourceBundleManager;
 import com.matteoveroni.learnnewwords.javafx.localization.exceptions.ResourceBundleForThisLocaleDoesntExistException;
 import com.matteoveroni.learnnewwords.model.dictionary.Dictionary;
+import com.matteoveroni.learnnewwords.model.gson.GsonSingleton;
+import com.matteoveroni.learnnewwords.model.translations.Translations;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Locale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +21,7 @@ import javafx.stage.Stage;
 /**
  *
  * @author Matteo Veroni
- * @version 0.0.1
+ * @version 0.0.2
  *
  * <b> Author Web Sites: </b>
  * <br/><a href="http://www.matteoveroni.com">www.matteoveroni.com</a>
@@ -24,13 +30,12 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
 	private static final String APPLICATION_NAME = "Learn New Words";
-	private static final String APPLICATION_VERSION = "0.0.1";
+	private static final String APPLICATION_VERSION = "0.0.2";
 
 	@Override
 	public void start(Stage stage) throws ResourceBundleForThisLocaleDoesntExistException, IOException {
 		ResourceBundleManager resourceBundleManager = new ResourceBundleManager();
 		Dictionary dictionary = new Dictionary(Locale.ENGLISH, Locale.ITALIAN);
-
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Demo.fxml"));
 			fxmlLoader.setResources(resourceBundleManager.getResourceBundle());
@@ -45,7 +50,7 @@ public class MainApp extends Application {
 		} catch (ResourceBundleForThisLocaleDoesntExistException | IOException ex) {
 			throw new RuntimeException(ex);
 		}
-//            performGsonTest();
+		performGsonTest();
 	}
 
 	/**
@@ -60,64 +65,30 @@ public class MainApp extends Application {
 		launch(args);
 	}
 
-//    private void performGsonTest() {
-//
-//        try {
-////            String translationOfDog1 = "dog";
-////
-////            Word wordCane = new Word();
-////            wordCane.setWord("cane");
-////            wordCane.addTranslation(translationOfDog1);
-//
-//            Dictionary englishItalianDictionary = new Dictionary();
-//            englishItalianDictionary.setLanguageOfTheDictionary(new Locale("en", "EN"));
-//            englishItalianDictionary.setLanguageOfTranslations(new Locale("it", "IT"));
-//
-//            // I create a english word 'allow'
-//            String englishWordAllow = "allow";
-//
-//            // Creating two italian words: 'consentire' and 'permettere'
-//            String italianWordConsentire = "consentire";
-//            String italianWordPermettere = "permettere";
-//
-//            // Putting the two italian words created into the class translations for allow
-//            Translations italianTranslationsForEnglishWordAllow = new Translations();
-//            List<String> listOfItalianTranslationsForEnglishWordAllow = new ArrayList<>();
-//            listOfItalianTranslationsForEnglishWordAllow.add(italianWordConsentire);
-//            listOfItalianTranslationsForEnglishWordAllow.add(italianWordPermettere);
-//            italianTranslationsForEnglishWordAllow.setTranslations(listOfItalianTranslationsForEnglishWordAllow);
-//            
-//            // Putting the translations into the english-italian dictionary
-//            Map<String, Translations> mapOfDictionaryElements = new HashMap<>();
-//            mapOfDictionaryElements.put(englishWordAllow, italianTranslationsForEnglishWordAllow);
-//            englishItalianDictionary.setTranslations(mapOfDictionaryElements);
-//           
-//            GsonBuilder builder = new GsonBuilder();
-//            Gson gson = builder.create();
-//
-//            System.out.println(gson.toJson(englishItalianDictionary));
-//
-//            Dictionary d = new Dictionary();
-//            d = gson.fromJson(gson.toJson(englishItalianDictionary), Dictionary.class);
-//            
-//            
-//            BufferedReader jsonResourceReader
-//                = new BufferedReader(
-//                    new InputStreamReader(getClass().getResource("/persistence/italian-english.json").openConnection().getInputStream()
-//                    )
-//                );
-//
-//            Dictionary italian_englishReader = gson.fromJson(jsonResourceReader, Dictionary.class);
-//            
-////            for (String wordInTheDictionary : italian_englishReader.getTranslations().keySet()) {
-////                System.out.println("Word -> " + wordInTheDictionary);
-////                for (String translation : italian_englishReader.getTranslationsOfWord(wordInTheDictionary).getTranslations()) {
-////                    System.out.println("\tTranslation ->" + translation);
-////                }
-////            }
-//
-//        } catch (IOException | JsonSyntaxException | JsonIOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+	private void performGsonTest() {
+		try {
+			Dictionary englishItalianDictionary = new Dictionary(Locale.ENGLISH, Locale.ITALIAN);
+
+			// Putting the two italian words created into the class translations for allow
+			Translations translationWordAllow = new Translations("consentire");
+			translationWordAllow.addTranslation("permettere");
+
+			// Putting the translations into the english-italian dictionary
+			englishItalianDictionary.createWordAndTranslations("allow", translationWordAllow);
+
+			System.out.println(englishItalianDictionary);
+
+			BufferedReader jsonResourceReader
+				= new BufferedReader(
+					new InputStreamReader(getClass().getResource("/persistence/italian-english.json").openConnection().getInputStream()
+					)
+				);
+
+			Dictionary italian_englishReader = GsonSingleton.getInstance().fromJson(jsonResourceReader, Dictionary.class);
+			System.out.println(italian_englishReader);
+
+		} catch (IOException | JsonSyntaxException | JsonIOException ex) {
+			ex.printStackTrace();
+		}
+	}
 }
