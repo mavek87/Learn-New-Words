@@ -8,8 +8,19 @@ public class Translations {
 
 	List<String> translations = new ArrayList<>();
 
-	public Translations(String translation) {
-		translations.add(translation);
+	public Translations() {
+	}
+
+	public List<String> getTranslations() {
+		return translations;
+	}
+
+	public int size() {
+		return translations.size();
+	}
+
+	public boolean isEmpty() {
+		return translations.isEmpty();
 	}
 
 	public boolean addTranslation(String translation) {

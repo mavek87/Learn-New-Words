@@ -5,6 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import com.matteoveroni.learnnewwords.javafx.controllers.ModellableDemoController;
 import com.matteoveroni.learnnewwords.javafx.localization.ResourceBundleManager;
 import com.matteoveroni.learnnewwords.javafx.localization.exceptions.ResourceBundleForThisLocaleDoesntExistException;
+import com.matteoveroni.learnnewwords.model.WordInsertionModel;
 import com.matteoveroni.learnnewwords.model.dictionary.Dictionary;
 import com.matteoveroni.learnnewwords.model.gson.GsonSingleton;
 import com.matteoveroni.learnnewwords.model.translations.Translations;
@@ -41,7 +42,18 @@ public class MainApp extends Application {
 			fxmlLoader.setResources(resourceBundleManager.getResourceBundle());
 			Parent root = fxmlLoader.load();
 			ModellableDemoController demoController = fxmlLoader.getController();
-			demoController.setModel(dictionary);
+			
+			Translations translationsWord = new Translations();
+			translationsWord.addTranslation("parola");
+			dictionary.createWordAndTranslations("word", translationsWord);
+
+			Translations translationsSee = new Translations();
+			translationsSee.addTranslation("visto");
+			translationsSee.addTranslation("vedere");
+			dictionary.createWordAndTranslations("see", translationsSee);
+			
+			WordInsertionModel modelWordInsertion = new WordInsertionModel(dictionary);
+			demoController.setModel(modelWordInsertion);
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("/styles/Styles.css");
 			stage.setTitle(APPLICATION_NAME + " | v." + APPLICATION_VERSION);
@@ -70,8 +82,9 @@ public class MainApp extends Application {
 			Dictionary englishItalianDictionary = new Dictionary(Locale.ENGLISH, Locale.ITALIAN);
 
 			// Putting the two italian words created into the class translations for allow
-			Translations translationWordAllow = new Translations("consentire");
+			Translations translationWordAllow = new Translations();
 			translationWordAllow.addTranslation("permettere");
+			translationWordAllow.addTranslation("consentire");
 
 			// Putting the translations into the english-italian dictionary
 			englishItalianDictionary.createWordAndTranslations("allow", translationWordAllow);

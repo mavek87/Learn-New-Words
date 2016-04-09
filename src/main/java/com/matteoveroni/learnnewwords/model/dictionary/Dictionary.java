@@ -33,6 +33,10 @@ public class Dictionary {
 		dictionaryMap.replace(word, translations);
 	}
 
+	public boolean containsTranslationsForWord(String word) {
+		return dictionaryMap.containsKey(word) && !dictionaryMap.get(word).getTranslations().isEmpty();
+	}
+
 	public Locale getDictionaryLanguage() {
 		return dictionaryLanguage;
 	}

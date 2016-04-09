@@ -14,28 +14,49 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.matteoveroni.learnnewwords.javafx.controllers.DemoController">
-   <bottom>
-      <Button fx:id="btn_addWord" mnemonicParsing="false" onAction="#saveNewDictionaryWord" text="Add Word" BorderPane.alignment="CENTER" />
-   </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <BorderPane BorderPane.alignment="CENTER">
+               <left>
+                  <Label text="Dictionary Word:" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="20.0" right="10.0" />
+                     </BorderPane.margin></Label>
+               </left>
+               <center>
+                  <TextField fx:id="txt_dictionaryWord" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="10.0" right="20.0" />
+                     </BorderPane.margin>
+                  </TextField>
+               </center>
+               <right>
+                  <Button mnemonicParsing="false" text="Search Word" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="20.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </right>
+            </BorderPane>
+         </top>
+         <center>
+            <VBox BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Dictionary Word:" />
-                  <TextField fx:id="txt_dictionaryWord" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Dictionary Translation:" />
+                        <TextField fx:id="txt_dictionaryTranslation" />
+                        <Button fx:id="btn_addDictionaryTranslation" mnemonicParsing="false" onAction="#addDictionaryTranslation" text="+" />
+                        <AnchorPane fx:id="paneListview" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Dictionary Translation:" />
-                  <TextArea fx:id="txt_dictionaryTranslation" prefHeight="200.0" prefWidth="200.0" />
-                  <Button fx:id="btn_addDictionaryTranslation" mnemonicParsing="false" onAction="#addDictionaryTranslation" text="+" />
-                  <ListView fx:id="list_dictionaryTranslations" prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-         </children>
-      </VBox>
+            </VBox>
+         </center>
+         <bottom>
+            <Button fx:id="btn_addWord" mnemonicParsing="false" onAction="#saveNewDictionaryWord" text="Add Word" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
    </center>
 </BorderPane>

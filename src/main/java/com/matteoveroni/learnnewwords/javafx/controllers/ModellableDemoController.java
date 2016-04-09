@@ -1,11 +1,11 @@
 package com.matteoveroni.learnnewwords.javafx.controllers;
 
-import com.matteoveroni.learnnewwords.model.dictionary.Dictionary;
+import com.matteoveroni.learnnewwords.model.WordInsertionModel;
 
 /**
  *
  * @author Matteo Veroni
  */
 public interface ModellableDemoController {
-    public void setModel(Dictionary dictionary);
+    public void setModel(WordInsertionModel model);
 }
