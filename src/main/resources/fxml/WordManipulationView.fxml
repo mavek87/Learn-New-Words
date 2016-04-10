@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.matteoveroni.learnnewwords.javafx.controllers.DemoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.matteoveroni.learnnewwords.javafx.controllers.WordManipulationViewController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
@@ -35,7 +36,7 @@
                         </TextField>
                      </center>
                      <right>
-                        <Button mnemonicParsing="false" text="Search Word" BorderPane.alignment="CENTER">
+                        <Button fx:id="btn_searchWord" mnemonicParsing="false" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets right="20.0" />
                            </BorderPane.margin>
@@ -62,7 +63,7 @@
                   </HBox>
                   <BorderPane prefHeight="100.0">
                      <center>
-                        <Button fx:id="btn_addWord" mnemonicParsing="false" onAction="#saveNewDictionaryWord" text="Add Word" BorderPane.alignment="CENTER" />
+                        <Button fx:id="btn_addWord" mnemonicParsing="false" onAction="#saveNewDictionaryWord" text="Create Word" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>

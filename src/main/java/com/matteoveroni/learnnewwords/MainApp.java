@@ -38,20 +38,31 @@ public class MainApp extends Application {
 		ResourceBundleManager resourceBundleManager = new ResourceBundleManager();
 		Dictionary dictionary = new Dictionary(Locale.ENGLISH, Locale.ITALIAN);
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Demo.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/WordManipulationView.fxml"));
 			fxmlLoader.setResources(resourceBundleManager.getResourceBundle());
 			Parent root = fxmlLoader.load();
 			ModellableDemoController demoController = fxmlLoader.getController();
-			
+
 			Translations translationsWord = new Translations();
 			translationsWord.addTranslation("parola");
 			dictionary.createWordAndTranslations("word", translationsWord);
+
+			Translations translationsGet = new Translations();
+			translationsGet.addTranslation("prendere");
+			translationsGet.addTranslation("ottenere");
+			translationsGet.addTranslation("tenere");
+			translationsGet.addTranslation("trattenere");
+			translationsGet.addTranslation("acquisire");
+			translationsGet.addTranslation("prelevare");
+			translationsGet.addTranslation("a");
+			translationsGet.addTranslation("b");
+			dictionary.createWordAndTranslations("get", translationsGet);
 
 			Translations translationsSee = new Translations();
 			translationsSee.addTranslation("visto");
 			translationsSee.addTranslation("vedere");
 			dictionary.createWordAndTranslations("see", translationsSee);
-			
+
 			WordInsertionModel modelWordInsertion = new WordInsertionModel(dictionary);
 			demoController.setModel(modelWordInsertion);
 			Scene scene = new Scene(root);

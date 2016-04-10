@@ -13,9 +13,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-public class DemoController implements ModellableDemoController, Initializable {
+public class WordManipulationViewController implements ModellableDemoController, Initializable {
 
 	private WordInsertionModel model;
 	private ObservableList<String> observableTranslationsOfDictionary;
@@ -28,15 +30,19 @@ public class DemoController implements ModellableDemoController, Initializable {
 	@FXML
 	private TextField txt_dictionaryTranslation;
 	@FXML
+	private Button btn_searchWord;
+	@FXML
 	private Button btn_addWord;
 	@FXML
 	private Button btn_addDictionaryTranslation;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		final ImageView imageViewSearchButton = new ImageView(new Image(getClass().getResourceAsStream("/images/search-icon.png")));
+		btn_searchWord.setGraphic(imageViewSearchButton);
+
 		observableTranslationsOfDictionary = FXCollections.observableArrayList(new ArrayList<>());
 		listView_translationsOfdictionary = new ListView<>(observableTranslationsOfDictionary);
-		listView_translationsOfdictionary.setPrefHeight(100);
 		listView_translationsOfdictionary.setItems(observableTranslationsOfDictionary);
 		paneListview.setCenter(listView_translationsOfdictionary);
 	}
@@ -47,8 +53,10 @@ public class DemoController implements ModellableDemoController, Initializable {
 		txt_dictionaryWord.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
 			if (populateTranslationsListView()) {
 				txt_dictionaryWord.setStyle("-fx-font-weight:bold;");
+				btn_addWord.setText("Save word");
 			} else {
 				txt_dictionaryWord.setStyle("");
+				btn_addWord.setText("Create word");
 			}
 		});
 	}
