@@ -3,9 +3,7 @@ package com.matteoveroni.learnnewwords.javafx.controllers;
 import com.matteoveroni.learnnewwords.model.WordInsertionModel;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,16 +13,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class DemoController implements ModellableDemoController, Initializable {
 
 	private WordInsertionModel model;
-	private ObservableList<String> translationsOfDictionary;
-	private ListView<String> listView_dictionaryTranslations;
+	private ObservableList<String> observableTranslationsOfDictionary;
+	private ListView<String> listView_translationsOfdictionary;
 
 	@FXML
-	private AnchorPane paneListview;
+	private BorderPane paneListview;
 	@FXML
 	private TextField txt_dictionaryWord;
 	@FXML
@@ -36,35 +34,37 @@ public class DemoController implements ModellableDemoController, Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		List<String> translations = new ArrayList<>();
-		translationsOfDictionary = FXCollections.observableArrayList(translations);
-		listView_dictionaryTranslations = new ListView<>(translationsOfDictionary);
-		listView_dictionaryTranslations.setPrefHeight(100);
-		listView_dictionaryTranslations.setItems(translationsOfDictionary);
-		paneListview.getChildren().add(listView_dictionaryTranslations);
-
+		observableTranslationsOfDictionary = FXCollections.observableArrayList(new ArrayList<>());
+		listView_translationsOfdictionary = new ListView<>(observableTranslationsOfDictionary);
+		listView_translationsOfdictionary.setPrefHeight(100);
+		listView_translationsOfdictionary.setItems(observableTranslationsOfDictionary);
+		paneListview.setCenter(listView_translationsOfdictionary);
 	}
 
 	@Override
 	public void setModel(WordInsertionModel model) {
 		this.model = model;
-		txt_dictionaryWord.textProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				populateTranslationsListView();
+		txt_dictionaryWord.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+			if (populateTranslationsListView()) {
+				txt_dictionaryWord.setStyle("-fx-font-weight:bold;");
+			} else {
+				txt_dictionaryWord.setStyle("");
 			}
 		});
 	}
 
-	private void populateTranslationsListView() {
+	private boolean populateTranslationsListView() {
+		boolean isListViewPopulated;
 		if (isStringValidAndNotNull(txt_dictionaryWord.getText()) && model.getDictionary().containsTranslationsForWord(txt_dictionaryWord.getText())) {
-			translationsOfDictionary = FXCollections.observableArrayList(model.getDictionary().getTranslationsForWord(txt_dictionaryWord.getText()).getTranslations());
-			listView_dictionaryTranslations.setItems(translationsOfDictionary);
+			observableTranslationsOfDictionary = FXCollections.observableArrayList(model.getDictionary().getTranslationsForWord(txt_dictionaryWord.getText()).getTranslations());
+			listView_translationsOfdictionary.setItems(observableTranslationsOfDictionary);
+			isListViewPopulated = true;
 		} else {
-			listView_dictionaryTranslations.setItems(null);
+			listView_translationsOfdictionary.setItems(null);
+			isListViewPopulated = false;
 		}
-		listView_dictionaryTranslations.refresh();
+		listView_translationsOfdictionary.refresh();
+		return isListViewPopulated;
 	}
 
 	private boolean isStringValidAndNotNull(String string) {

@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 /**
  *
  * @author Matteo Veroni
- * @version 0.0.2
+ * @version 0.0.3
  *
  * <b> Author Web Sites: </b>
  * <br/><a href="http://www.matteoveroni.com">www.matteoveroni.com</a>
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
 	private static final String APPLICATION_NAME = "Learn New Words";
-	private static final String APPLICATION_VERSION = "0.0.2";
+	private static final String APPLICATION_VERSION = "0.0.3";
 
 	@Override
 	public void start(Stage stage) throws ResourceBundleForThisLocaleDoesntExistException, IOException {
